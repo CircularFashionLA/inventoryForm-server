@@ -19,7 +19,7 @@ router.get('/:sku', (req, res) => {
       if (searchResult) res.json({ result: searchResult })
       else
         res.json({
-          error: `No results found when searching for SKU ${sku}, ${searchResult}`,
+          error: `No results found when searching for SKU ${sku}`,
         })
     })
     .catch((error) => res.json({ error: error.message }))
