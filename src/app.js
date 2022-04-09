@@ -8,4 +8,5 @@ app.use('/clothing', require('./routes/clothing'))
 
 const PORT = 8080
 
+// eslint-disable-next-line no-console
 app.listen(PORT, () => console.log(`Server running on port ${PORT}!`))
