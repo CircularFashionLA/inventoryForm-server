@@ -5,11 +5,10 @@ const Clothing = require('../models/Clothing')
 
 // get all clothing
 router.get('/', (req, res) => {
-    console.log('fetching clothes')
-    Clothing.find()
-        .then((allClothing) => res.json({ results: allClothing }))
-        .catch(error => res.json({ error }))
-
+  console.log('fetching clothes')
+  Clothing.find()
+    .then((allClothing) => res.json({ results: allClothing }))
+    .catch((error) => res.json({ error }))
 })
 
 // get one clothing by SKU
