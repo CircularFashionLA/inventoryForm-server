@@ -45,7 +45,13 @@ const clothingSchema = new mongoose.Schema({
     chestWidth: Number,
     sleeveLength: Number,
     bicepWidth: Number,
+    garmetLength: Number,
     bottomHemSweep: Number,
+    hipWidth: Number,
+    thighWidth: Number,
+    rise: Number,
+    inseam: Number,
+    outseam: Number,
     topOfChestToCrotch: Number,
   },
 })
