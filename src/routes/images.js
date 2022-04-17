@@ -12,9 +12,8 @@ router.post('/geturl', (req, res) => {
         upload_preset: 'cfla-inventory',
       })
       .then((uploadRes) => res.json({ url: uploadRes.url }))
-      .catch((error) => res.json({ error: error.message }))
-  } catch (err) {
-    console.log(err)
+  } catch (error) {
+    res.json({ error })
   }
 })
 
