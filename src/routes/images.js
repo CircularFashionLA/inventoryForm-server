@@ -3,7 +3,7 @@ const cloudinary = require('../utils/cloudinary')
 
 const router = express.Router()
 
-router.post('/geturl', async (req, res) => {
+router.post('/geturl', (req, res) => {
   const fileStr = req.body.data
 
   cloudinary.uploader
