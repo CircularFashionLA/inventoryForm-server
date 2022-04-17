@@ -6,7 +6,11 @@ const app = express()
 
 require('./config/connectDB')()
 
-app.use(cors())
+app.use(
+  cors({
+    origin: '*',
+  }),
+)
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*')
   res.header(
