@@ -13,7 +13,8 @@ router.post('/geturl', (req, res) => {
       })
       .then((uploadRes) => res.json({ url: uploadRes.url }))
   } catch (error) {
-    res.json({ error })
+    console.log(error)
+    res.send('oh my gosh... pls work')
   }
 })
 
