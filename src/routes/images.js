@@ -5,7 +5,9 @@ const router = express.Router()
 
 router.post('/geturl', (req, res) => {
   try {
+    console.log('made it to geturl')
     const fileStr = req.body.data
+    console.log(`req.body: ${fileStr}`)
 
     cloudinary.uploader
       .upload(fileStr, {
@@ -16,6 +18,7 @@ router.post('/geturl', (req, res) => {
     console.log(error)
     res.send('oh my gosh... pls work')
   }
+  console.log('after the try catch')
 })
 
 module.exports = router
