@@ -26,6 +26,8 @@ const clothingSchema = new mongoose.Schema({
       turquoise: Boolean,
       bluekpruple: Boolean,
       maroon: Boolean,
+      Metallic: Boolean,
+      Neon: Boolean,
     },
     size: {
       xs: Boolean,
