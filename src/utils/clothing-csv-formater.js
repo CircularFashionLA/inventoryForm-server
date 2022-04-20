@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-syntax */
 const headers = [
   { label: 'Stock Keeping Unit', key: 'sku' },
-  { label: 'Product Name', key: 'productnName' },
+  { label: 'Product Name', key: 'productName' },
   { label: 'Category', key: 'category' },
   { label: 'SubCategory', key: 'subCategory' },
   { label: 'Image', key: 'image' },
