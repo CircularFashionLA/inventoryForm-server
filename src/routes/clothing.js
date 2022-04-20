@@ -1,4 +1,5 @@
 const express = require('express')
+const { formatData } = require('../utils/clothing-csv-formater')
 
 const router = express.Router()
 const Clothing = require('../models/Clothing')
@@ -8,6 +9,13 @@ router.get('/', (req, res) => {
   Clothing.find()
     .then((allClothing) => res.json({ results: allClothing }))
     .catch((error) => res.json({ error: error.message }))
+})
+
+// get clothing in the correct CSV Format
+router.get('/csv-format', async (req, res) => {
+  const allClothing = await Clothing.find()
+  const csvFormatClothing = await formatData(allClothing)
+  res.json({ results: csvFormatClothing })
 })
 
 // get one clothing by SKU
