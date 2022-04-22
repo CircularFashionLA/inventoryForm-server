@@ -40,6 +40,18 @@ const stringifyColors = (colors) => {
   return str.slice(0, -2)
 }
 
+const stringifyFit = (fits) => {
+  let str = ''
+  for (const fit in fits) {
+    if (fits[fit] === true) {
+      if (fit === 'tightAndStretchy') str += 'Tight and Stretchy, '
+      else if (fit === 'slimTailored') str += 'Slim Tailored, '
+      else if (fit === 'looselyOversized') str += 'Loosely Oversized, '
+    }
+  }
+  return str.slice(0, -2)
+}
+
 const stringifySizes = (sizes) => {
   let str = ''
   for (const size in sizes) {
@@ -63,6 +75,7 @@ const formatData = (clothing) =>
         }
         csvJson.colors = stringifyColors(csvJson.colors)
         csvJson.size = stringifySizes(csvJson.size)
+        csvJson.fit = stringifyFit(csvJson.fit)
         allFormatedClothings.push(csvJson)
       })
       resolve(allFormatedClothings)
