@@ -38,7 +38,11 @@ const clothingSchema = new mongoose.Schema({
       twoX: Boolean,
       threeX: Boolean,
     },
-    fit: String,
+    fit: {
+      tightAndStretchy: Boolean,
+      slimTailored: Boolean,
+      looselyOversized: Boolean,
+    },
     fiber: String,
   },
   measurements: {
