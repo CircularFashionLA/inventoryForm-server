@@ -7,7 +7,7 @@ const Clothing = require('../models/Clothing')
 // get all clothing
 router.get('/', (req, res) => {
   Clothing.find()
-    .then((allClothing) => res.json({ results: allClothing }))
+    .then((allClothing) => res.json({ results: allClothing.reverse() }))
     .catch((error) => res.json({ error: error.message }))
 })
 
