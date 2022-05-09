@@ -42,6 +42,16 @@ router.post('/', (req, res) => {
     .catch((error) => res.json({ error: error.message }))
 })
 
+// update an existing clothing
+router.put('/:id', (req, res) => {
+  const { id } = req.params
+  const clothingToUpdate = req.body
+
+  Clothing.findByIdAndUpdate(id, clothingToUpdate)
+    .then((updatedClothing) => res.json({ updatedClothing }))
+    .catch((error) => res.json({ error: error.message }))
+})
+
 // delete clothing by id
 router.delete('/:id', (req, res) => {
   const { id } = req.params

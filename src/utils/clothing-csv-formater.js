@@ -1,31 +1,19 @@
 /* eslint-disable no-restricted-syntax */
 const headers = [
-  { label: 'Stock Keeping Unit', key: 'sku' },
-  { label: 'Product Name', key: 'productName' },
-  { label: 'Category', key: 'category' },
-  { label: 'SubCategory', key: 'subCategory' },
-  { label: 'Image', key: 'image' },
-  { label: 'Size', key: 'size' },
-  { label: 'Colors', key: 'colors' },
-  { label: 'Off Shoulder', key: 'offShoulder' },
-  { label: 'Sleeveless', key: 'sleeveless' },
-  { label: 'Stretchy', key: 'stretchy' },
-  { label: 'Adjustable', key: 'adjustable' },
-  { label: 'Fit', key: 'fit' },
-  { label: 'Fiber', key: 'fiber' },
-  { label: 'Waist Width', key: 'waistWidth' },
-  { label: 'Shoulder Width', key: 'shoulderWidth' },
-  { label: 'Chest Width', key: 'chestWidth' },
-  { label: 'Sleeve Length', key: 'sleeveLength' },
-  { label: 'Bicep Width', key: 'bicepWidth' },
-  { label: 'Garmet Length', key: 'garmetLength' },
-  { label: 'Bottom Hem Sweep', key: 'bottomHemSweep' },
-  { label: 'Hip Width', key: 'hipWidth' },
-  { label: 'Thigh Width', key: 'thighWidth' },
-  { label: 'Email', key: 'rise' },
-  { label: 'Inseam', key: 'inseam' },
-  { label: 'Outseam', key: 'outseam' },
-  { label: 'Top of Chest to Crotch', key: 'topOfChestToCrotch' },
+  { label: 'handleId', key: 'handleId' },
+  { label: 'fieldType', key: 'fieldType' },
+  { label: 'name', key: 'name' },
+  { label: 'description', key: 'description' },
+  { label: 'productImageUrl', key: 'productImageUrl' },
+  { label: 'collection', key: 'collection' },
+  { label: 'sku', key: 'sku' },
+  { label: 'ribbon', key: 'ribbon' },
+  { label: 'productOptionName1', key: 'productOptionName1' },
+  { label: 'productOptionType1', key: 'productOptionType1' },
+  { label: 'productOptionDescription1', key: 'productOptionDescription1' },
+  { label: 'productOptionName2', key: 'productOptionName2' },
+  { label: 'productOptionType2', key: 'productOptionType2' },
+  { label: 'productOptionDescription2', key: 'productOptionDescription2' },
 ]
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
@@ -34,34 +22,26 @@ const stringifyColors = (colors) => {
   let str = ''
   for (const color in colors) {
     if (colors[color] === true) {
-      str += `${capitalize(color)}, `
+      str += `${capitalize(color)};`
     }
   }
-  return str.slice(0, -2)
-}
-
-const stringifyFit = (fits) => {
-  let str = ''
-  for (const fit in fits) {
-    if (fits[fit] === true) {
-      if (fit === 'tightAndStretchy') str += 'Tight and Stretchy, '
-      else if (fit === 'slimTailored') str += 'Slim Tailored, '
-      else if (fit === 'looselyOversized') str += 'Loosely Oversized, '
-    }
-  }
-  return str.slice(0, -2)
+  return str.slice(0, -1)
 }
 
 const stringifySizes = (sizes) => {
   let str = ''
   for (const size in sizes) {
     if (sizes[size] === true) {
-      if (size === 'twoX') str += `xx, `
-      else if (size === 'threeX') str += `xxx, `
-      else str += `${size.toUpperCase()}, `
+      if (size === 'xs') str += 'Extra Small (fits 0-3);'
+      else if (size === 's') str += 'Small (fits 2-4);'
+      else if (size === 'm') str += 'Medium (fits 6-8);'
+      else if (size === 'l') str += 'Large (fits 10-12);'
+      else if (size === 'xl') str += 'Extra Large (fits 14-16);'
+      else if (size === 'twoX') str += '2X (fits 18-20);'
+      else if (size === 'threeX') str += '3X (fits 0-3);'
     }
   }
-  return str.slice(0, -2)
+  return str.slice(0, -1)
 }
 
 const formatData = (clothing) =>
@@ -70,12 +50,22 @@ const formatData = (clothing) =>
       const allFormatedClothings = []
       clothing.forEach((item) => {
         const csvJson = {
-          ...item.measurements,
-          ...item.attributes,
+          // eslint-disable-next-line no-underscore-dangle
+          handleId: item._id,
+          fieldType: 'Product',
+          name: item.attributes.productName,
+          description: 'Descriptions in Development',
+          productImageUrl: item.attributes.image,
+          collection: item.attributes.category,
+          sku: item.attributes.sku,
+          ribbon: 'TBD',
+          productOptionName1: 'Size',
+          productOptionType1: 'DROP_DOWN',
+          productOptionDescription1: stringifySizes(item.attributes.sizes),
+          productOptionName2: 'Color',
+          productOptionType2: 'COLOR',
+          productOptionDescription2: stringifyColors(item.attributes.colors),
         }
-        csvJson.colors = stringifyColors(csvJson.colors)
-        csvJson.size = stringifySizes(csvJson.size)
-        csvJson.fit = stringifyFit(csvJson.fit)
         allFormatedClothings.push(csvJson)
       })
       resolve(allFormatedClothings)
