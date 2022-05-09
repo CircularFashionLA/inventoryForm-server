@@ -9,6 +9,7 @@ const clothingSchema = new mongoose.Schema({
     subCategory: String,
     productName: String,
     description: String,
+    addMeasurmentsToDescription: Boolean,
     careInstructions: String,
     sku: String,
     image: String,
