@@ -5,6 +5,7 @@ const router = express.Router()
 
 router.post('/geturl', (req, res) => {
   try {
+    res.header('Access-Control-Allow-Origin', '*')
     const fileStr = req.body.data
     cloudinary.uploader
       .upload(fileStr, {

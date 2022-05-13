@@ -33,6 +33,7 @@ const stringifyColors = (colors) => {
 
 const stringifySizes = (sizes) => {
   let str = ''
+  // eslint-disable-next-line guard-for-in
   for (const size in sizes) {
     if (sizes[size] === true) {
       if (size === 'xs') str += 'Extra Small (fits 0-3);'
@@ -65,10 +66,10 @@ const formatData = (clothing) =>
           productImageUrl: item.attributes.image,
           collection: item.attributes.category,
           sku: item.attributes.sku,
-          ribbon: 'TBD',
+          // ribbon: 'TBD',
           productOptionName1: 'Size',
           productOptionType1: 'DROP_DOWN',
-          productOptionDescription1: stringifySizes(item.attributes.sizes),
+          productOptionDescription1: stringifySizes(item.attributes.size),
           productOptionName2: 'Color',
           productOptionType2: 'COLOR',
           productOptionDescription2: stringifyColors(item.attributes.colors),
