@@ -15,6 +15,8 @@ const headers = [
   { label: 'productOptionName2', key: 'productOptionName2' },
   { label: 'productOptionType2', key: 'productOptionType2' },
   { label: 'productOptionDescription2', key: 'productOptionDescription2' },
+  { label: 'additionalInfoTitle1', key: 'additionalInfoTitle1' },
+  { label: 'additionalInfoDescription1', key: 'additionalInfoDescription1' },
 ]
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
@@ -70,10 +72,16 @@ const formatData = (clothing) =>
           productOptionName2: 'Color',
           productOptionType2: 'COLOR',
           productOptionDescription2: stringifyColors(item.attributes.colors),
+          additionalInfoTitle1: item.attributes.careInstructions.trim()
+            ? 'Care Instructions'
+            : '',
+          additionalInfoDescription1: item.attributes.careInstructions.trim()
+            ? item.attributes.careInstructions
+            : '',
         }
         allFormatedClothings.push(csvJson)
       })
-      resolve(allFormatedClothings)
+      resolve(allFormatedClothings.reverse())
     } catch (error) {
       reject(error)
     }

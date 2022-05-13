@@ -58,7 +58,7 @@ const stringifyOtherDetails = (attributes) => {
 const getDescriptionData = (item) => {
   const { attributes, measurements } = item
   let str = ''
-  str += 'Attributes'
+  str += '\n\nAttributes'
   str += attributes.category ? `\nCategory: ${attributes.category}` : ''
   str += `\nColor(s): ${stringifyColors(attributes.colors)}`
   str += `\nSize: ${stringifySizes(attributes.size)}  ${stringifyFit(
@@ -117,7 +117,7 @@ const getDescriptionData = (item) => {
   str += measurements.outseam ? `\nOutseam: ${measurements.outseam} inches` : ''
 
   str += measurements.garmetLength
-    ? `\nGarmet Length: ${measurements.garmetLength} inches`
+    ? `\nGarment Length: ${measurements.garmetLength} inches`
     : ''
 
   return str
