@@ -1,3 +1,4 @@
+const getDescriptionData = require('./description-data')
 /* eslint-disable no-restricted-syntax */
 const headers = [
   { label: 'handleId', key: 'handleId' },
@@ -54,7 +55,11 @@ const formatData = (clothing) =>
           handleId: item._id,
           fieldType: 'Product',
           name: item.attributes.productName,
-          description: 'Descriptions in Development',
+          description: `${item.attributes.description}${
+            item.attributes.addMeasurmentsToDescription
+              ? getDescriptionData(item)
+              : ''
+          }`,
           productImageUrl: item.attributes.image,
           collection: item.attributes.category,
           sku: item.attributes.sku,
