@@ -1,3 +1,4 @@
+const getDescriptionData = require('./description-data')
 /* eslint-disable no-restricted-syntax */
 const headers = [
   { label: 'handleId', key: 'handleId' },
@@ -14,6 +15,8 @@ const headers = [
   { label: 'productOptionName2', key: 'productOptionName2' },
   { label: 'productOptionType2', key: 'productOptionType2' },
   { label: 'productOptionDescription2', key: 'productOptionDescription2' },
+  { label: 'additionalInfoTitle1', key: 'additionalInfoTitle1' },
+  { label: 'additionalInfoDescription1', key: 'additionalInfoDescription1' },
 ]
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
@@ -30,6 +33,7 @@ const stringifyColors = (colors) => {
 
 const stringifySizes = (sizes) => {
   let str = ''
+  // eslint-disable-next-line guard-for-in
   for (const size in sizes) {
     if (sizes[size] === true) {
       if (size === 'xs') str += 'Extra Small (fits 0-3);'
@@ -54,21 +58,31 @@ const formatData = (clothing) =>
           handleId: item._id,
           fieldType: 'Product',
           name: item.attributes.productName,
-          description: 'Descriptions in Development',
+          description: `${item.attributes.description}${
+            item.attributes.addMeasurmentsToDescription
+              ? getDescriptionData(item)
+              : ''
+          }`,
           productImageUrl: item.attributes.image,
           collection: item.attributes.category,
           sku: item.attributes.sku,
-          ribbon: 'TBD',
+          // ribbon: 'TBD',
           productOptionName1: 'Size',
           productOptionType1: 'DROP_DOWN',
-          productOptionDescription1: stringifySizes(item.attributes.sizes),
+          productOptionDescription1: stringifySizes(item.attributes.size),
           productOptionName2: 'Color',
           productOptionType2: 'COLOR',
           productOptionDescription2: stringifyColors(item.attributes.colors),
+          additionalInfoTitle1: item.attributes.careInstructions.trim()
+            ? 'Care Instructions'
+            : '',
+          additionalInfoDescription1: item.attributes.careInstructions.trim()
+            ? item.attributes.careInstructions
+            : '',
         }
         allFormatedClothings.push(csvJson)
       })
-      resolve(allFormatedClothings)
+      resolve(allFormatedClothings.reverse())
     } catch (error) {
       reject(error)
     }
