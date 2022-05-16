@@ -73,10 +73,10 @@ const formatData = (clothing) =>
           productOptionName2: 'Color',
           productOptionType2: 'COLOR',
           productOptionDescription2: stringifyColors(item.attributes.colors),
-          additionalInfoTitle1: item.attributes.careInstructions.trim()
+          additionalInfoTitle1: item.attributes.careInstructions
             ? 'Care Instructions'
             : '',
-          additionalInfoDescription1: item.attributes.careInstructions.trim()
+          additionalInfoDescription1: item.attributes.careInstructions
             ? item.attributes.careInstructions
             : '',
         }
