@@ -100,7 +100,7 @@ const getDescriptionData = (item) => {
     : ''
 
   str += measurements.topOfChestToCrotch
-    ? `\nTop of Chest to Crotch: ${measurements.topOfChestToCrotch} inches`
+    ? `\nTop of Shoulder/Chest to Crotch: ${measurements.topOfChestToCrotch} inches`
     : ''
   str += measurements.rise ? `\nRise: ${measurements.rise} inches` : ''
 
