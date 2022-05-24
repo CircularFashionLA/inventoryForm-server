@@ -55,7 +55,7 @@ const formatData = (clothing) =>
       clothing.forEach((item) => {
         const csvJson = {
           // eslint-disable-next-line no-underscore-dangle
-          handleId: item._id,
+          handleId: `product_${item._id}`,
           fieldType: 'Product',
           name: item.attributes.productName,
           description: `${item.attributes.description}${
@@ -64,9 +64,9 @@ const formatData = (clothing) =>
               : ''
           }`,
           productImageUrl: item.attributes.image,
-          collection: item.attributes.category,
+          collection: `${item.attributes.category};Shop In Stock`,
           sku: item.attributes.sku,
-          // ribbon: 'TBD',
+          ribbon: item.attributes.ribbon,
           productOptionName1: 'Size',
           productOptionType1: 'DROP_DOWN',
           productOptionDescription1: stringifySizes(item.attributes.size),

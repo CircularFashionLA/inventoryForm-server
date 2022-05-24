@@ -11,6 +11,7 @@ const clothingSchema = new mongoose.Schema({
     description: String,
     addMeasurmentsToDescription: Boolean,
     careInstructions: String,
+    ribbon: String,
     sku: String,
     image: String,
     stretchy: Boolean,
