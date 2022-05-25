@@ -37,13 +37,13 @@ const stringifySizes = (sizes) => {
   // eslint-disable-next-line guard-for-in
   for (const size in sizes) {
     if (sizes[size] === true) {
-      if (size === 'xs') str += 'Extra Small (fits 0-3);'
+      if (size === 'xs') str += 'Extra Small;'
       else if (size === 's') str += 'Small (fits 2-4);'
       else if (size === 'm') str += 'Medium (fits 6-8);'
       else if (size === 'l') str += 'Large (fits 10-12);'
       else if (size === 'xl') str += 'Extra Large (fits 14-16);'
       else if (size === 'twoX') str += '2X (fits 18-20);'
-      else if (size === 'threeX') str += '3X (fits 0-3);'
+      else if (size === 'threeX') str += '3X;'
     }
   }
   return str.slice(0, -1)
@@ -59,7 +59,10 @@ const formatData = (clothing) =>
           handleId: `product_${item._id}`,
           fieldType: 'Product',
           name: item.attributes.productName,
-          description: `${item.attributes.description}${
+          description: `${
+            item.attributes.description ? item.attributes.description : ''
+          }
+          ${
             item.attributes.addMeasurmentsToDescription
               ? getDescriptionData(item)
               : ''
